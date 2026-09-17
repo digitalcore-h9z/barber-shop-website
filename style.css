@@ -199,7 +199,8 @@ nav {
 /* Hero */
 
 .hero-section {
-  min-height: 100vh;
+  min-height: 100vh; /* fallback pentru browsere vechi */
+  min-height: 100dvh;
 }
 
 .hero-wrapper h1 {
@@ -212,7 +213,9 @@ nav {
 }
 
 .hero-wrapper {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -329,7 +332,9 @@ nav {
   }
 
   .hero-wrapper {
-    height: 120vh;
+    min-height: 100dvh;
+    height: auto;
+    padding: var(--space128) 0;
   }
 }
 
@@ -342,7 +347,9 @@ nav {
     height: 300px;
   }
   .hero-wrapper {
-    margin-top: var(--space64);
+    min-height: 100dvh;
+    height: auto;
+    padding: var(--space64) 0;
   }
   .hero-right {
     display: flex;
