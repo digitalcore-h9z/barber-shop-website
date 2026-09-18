@@ -17,8 +17,21 @@
   --body: #070707;
 }
 
-html {
-  scroll-behavior: smooth;
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -361,32 +374,55 @@ nav {
   .nav-links {
     display: none;
   }
+  nav {
+    width: 95%;
+  }
 }
 
 /* Services Section */
 
-.services-section {
+.services-section,
+.price-section,
+.gallery-section {
   padding: var(--space96) 0;
   position: relative;
-  /* background-color: var(--primary-tones-2); */
+}
+
+.services-section {
+  background: url(/Images/card/silk-1789742830786.png);
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  max-width: 100%;
+  display: block;
 }
 
 .services-text h2,
-.services-text p {
+.price-text h2,
+.services-text p,
+.price-text p,
+.gallery-text h2,
+.gallery-text p {
   color: #fff;
 }
 
-.services-text {
+.services-text,
+.price-text,
+.gallery-text {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.desc-services {
+.desc-services,
+.desc-price,
+.desc-gallery {
   max-width: 500px;
 }
 
-.services-text p {
+.services-text p,
+.price-text p,
+.gallery-text p {
   line-height: 1.6;
 }
 
@@ -394,12 +430,16 @@ nav {
   margin-top: var(--space64);
 }
 
-.services-wrapper {
-  display: grid;
-  place-content: center;
-  place-items: center;
-  grid-template-columns: repeat(3, 1fr);
+.service-card-front-wrapper,
+.service-card-back-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: var(--space32);
+}
+
+.service-card-back-wrapper {
+  margin-top: var(--space32);
 }
 
 .s4 {
@@ -415,17 +455,21 @@ nav {
 }
 
 .service-card-after {
-  background-color: var(--card);
+  /* background-color: var(--card); */
   border: 0.5px sold var(--border);
   border-radius: 5px;
   padding: 24px 48px;
   -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   max-width: 500px;
   height: 400px;
-  position: absolute;
-  top: -20px;
-  left: -20px;
+  position: relative;
+  transition: all ease 0.3s;
+  background-color: #8787871a;
+}
+
+.service-card-after:hover {
+  background-color: #87878730;
 }
 
 .service-card-after svg {
@@ -435,12 +479,14 @@ nav {
 }
 
 .service-card {
+  /*  
   border: 0.5px sold var(--border);
   border-radius: 5px;
   background-color: var(--primary-tones-2);
   padding: 24px 48px;
   width: 500px;
   height: 400px;
+  */
   z-index: 1;
   position: relative;
 }
@@ -456,61 +502,188 @@ nav {
   line-height: 1.6;
 }
 
-@media screen and (max-width: 1670px) {
-  .services-wrapper {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .s4,
-  .s5,
-  .s6 {
-    grid-row-start: auto;
-  }
-
-  .service-card,
-  .service-card-after {
-    width: 100%;
-    max-width: 500px;
+@media screen and (max-width: 1400px) {
+  .service-card-front-wrapper,
+  .service-card-back-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space32);
   }
 }
 
 @media screen and (max-width: 700px) {
-  .services-wrapper {
-    grid-template-columns: 1fr;
-    gap: var(--space24);
-  }
-
-  .services-text {
+  .services-text,
+  .price-text,
+  .gallery-text {
     display: flex;
     flex-direction: column;
   }
-  .services-text p {
+  .services-text p,
+  .price-text p,
+  .gallery-text p {
     margin-top: var(--space12);
   }
-  .services-section {
+  .services-section,
+  .price-section,
+  .gallery-section {
     padding: var(--space64) var(--space24);
   }
+}
 
-  .s4,
-  .s5,
-  .s6 {
-    grid-row-start: auto;
+/* Price Section */
+
+.price-card h3 {
+  color: #fff;
+  margin-left: var(--space24);
+}
+
+.price-card p {
+  color: var(--primary);
+  font-family: var(--font-medium);
+  font-size: var(--h3);
+  margin-right: var(--space24);
+}
+
+@media screen and (max-width: 700px) {
+  .price-card p,
+  .price-card h3 {
+    font-size: var(--h5);
+  }
+}
+
+.price-wrapper {
+  margin-top: var(--space64);
+}
+
+.price-card {
+  margin-top: var(--space32);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  padding: 16px;
+  transition: all ease 0.3s;
+  position: relative;
+}
+
+.price-card:hover {
+  border-top-color: var(--primary-tones-2);
+  border-bottom-color: var(--primary-tones-2);
+}
+
+.price-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/Images/card/silk-1789742830786.png");
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.price-card:hover::before {
+  opacity: 1;
+}
+
+.line {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  width: 20%;
+  height: 3px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+/* Gallery Section */
+
+.gallery-section {
+  background: url(./Images/background-gallery/silk-1789753839061.png);
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  max-width: 100%;
+  display: block;
+}
+
+.gallery-image img {
+  width: 400px;
+  height: 600px;
+  border-radius: 5px;
+  object-fit: cover;
+  border: 0.5px solid var(--border-subtile);
+}
+
+.gallery-image {
+  transition: all ease 0.3s;
+}
+
+.gallery-wrapper {
+  margin-top: var(--space64);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space32);
+}
+
+.gallery-image img {
+  transform: translateX(-50px);
+}
+
+.g-1 {
+  transform: rotate(-5deg);
+}
+
+.g-3 {
+  transform: rotate(5deg);
+}
+
+.gallery-image:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 1510px) {
+  .gallery-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    gap: var(--space32);
+  }
+  .gallery-image img {
+    width: 300px;
+    height: 500px;
   }
 
-  .service-card {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    min-height: 320px;
-    padding: var(--space24);
+  .g-1 {
+    transform: rotate(0deg);
   }
 
-  .service-card-after {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    min-height: 320px;
-    top: -10px;
-    left: -10px;
-    padding: var(--space24);
+  .g-3 {
+    transform: rotate(0deg);
+  }
+  .gallery-image img {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .gallery-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space24);
+  }
+  .gallery-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
