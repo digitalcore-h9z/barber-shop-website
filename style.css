@@ -132,6 +132,13 @@ nav {
   transition: all ease 0.3s;
 }
 
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
 .nav-links ul {
   display: flex;
   justify-content: center;
