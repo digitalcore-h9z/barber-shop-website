@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--color-primary) var(--color-bg-inner);
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -529,6 +534,19 @@ nav {
   align-items: center;
   margin-left: var(--space96);
 }
+
+@media screen and (max-width: 700px) {
+  .services-text,
+  .gallery-text,
+  .about-us-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    /* margin-left: var(--space96); */
+  }
+}
+
 /* 
 .desc-services,
 .desc-price,
