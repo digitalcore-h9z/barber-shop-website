@@ -27,13 +27,25 @@
         smoothWheel: true,
       });
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
+      (function () {
+        var root = document.documentElement;
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          root.classList.add("anim-prehide");
+          setTimeout(function () {
+            root.classList.remove("anim-prehide");
+          }, 2500);
+        }
+      })();
     </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
   </head>
   <body>
     <header role="banner">
@@ -489,6 +501,9 @@
                 <img
                   src="./assets/about-us/andre-reis-_XD3D9pH83k-unsplash.webp"
                   alt=""
+                  loading="lazy"
+                  width="300px"
+                  height="300px"
                 />
                 <div class="info-img">
                   <p>Alex</p>
@@ -498,6 +513,9 @@
                 <img
                   src="./assets/about-us/eugene-chystiakov-taZSJ6xmt48-unsplash.webp"
                   alt=""
+                  loading="lazy"
+                  width="300px"
+                  height="300px"
                 />
                 <div class="info-img">
                   <p>Radu</p>
@@ -507,6 +525,9 @@
                 <img
                   src="./assets/about-us/mitchell-orr-X03HwElKqfM-unsplash.webp"
                   alt=""
+                  loading="lazy"
+                  width="300px"
+                  height="300px"
                 />
                 <div class="info-img">
                   <p>Mihai</p>

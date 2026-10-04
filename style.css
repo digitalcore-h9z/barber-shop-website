@@ -14,6 +14,43 @@ html.lenis body {
   height: auto;
 }
 
+/* 1. No horizontal scrollbar during the side slide-ins.
+      `clip`, not `hidden`: no new scroll container, fixed nav unaffected. */
+.hero-section,
+.services-section,
+.about-us-section {
+  overflow-x: clip;
+}
+
+/* 2. Pre-hide animated elements before first paint. */
+html.anim-prehide .hero-section .clipper-img,
+html.anim-prehide .hero-section .hero-left-info,
+html.anim-prehide .hero-section .hero-title h1,
+html.anim-prehide .hero-section .hero-buttons,
+html.anim-prehide .hero-section .hero-social,
+html.anim-prehide .services-section .svg-service,
+html.anim-prehide .services-section .service,
+html.anim-prehide .about-us-section .title-about-us,
+html.anim-prehide .about-us-section .description-about-us,
+html.anim-prehide .about-us-section .social-about-us,
+html.anim-prehide .about-us-section .t-1,
+html.anim-prehide .about-us-section .t-2,
+html.anim-prehide .about-us-section .t-3 {
+  opacity: 0;
+}
+
+/* 3. Temporary anti-conflict class (added/removed by script.js). */
+.is-animating {
+  transition: none !important;
+}
+
+/* 4. Reduced-motion safety net. */
+@media (prefers-reduced-motion: reduce) {
+  html.anim-prehide * {
+    opacity: 1 !important;
+  }
+}
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
